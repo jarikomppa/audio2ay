@@ -46,10 +46,10 @@ is pretty liberally licensed, though.
 
 ## File Format
 
-1 byte      - number of AY channels used (1-3)
-1 byte      - frames per data block (usually 1)
-2 bytes     - blocks in the file
-2 bytes x N - AY register data. 4 bits volume, 4 bits coarse, 8 bits fine
+    1 byte      - number of AY channels used (1-3)
+    1 byte      - frames per data block (usually 1)
+    2 bytes     - blocks in the file
+    2 bytes x N - AY register data. 4 bits volume, 4 bits coarse, 8 bits fine
 
 ## Tools for Better Results
 
@@ -69,7 +69,7 @@ and/or reduce the AY channel count.
 
 ## Commandline Options
 
-audio2ay inputfilename (and optionally options)
+    audio2ay inputfilename (and optionally options)
 
 The input file can be a wav, flac, mp3 or ogg file.
 
@@ -77,35 +77,36 @@ Example:
 
     audio2ay test.wav --output=test.dat --wavout==test.wav
 
+Options in detail:
 
---help               Print usage and exit
+    --help               Print usage and exit
 
 Prints out the usage, which is more or less this list, without the
 additional explanations.
 
---output=filename    output filename, default "aydata.dat"
+    --output=filename    output filename, default "aydata.dat"
 
 Filename for the AY binary. Always written, if not specified,
 uses the default filename.
 
---frames=num         Frames per data, default 1
+    --frames=num         Frames per data, default 1
 
 Update the AY registers every N frames. Bigger value means smaller
 output file, but worse representation.
 
---minhz=num          Minimum frequency to consider, default 300
---maxhz=num          Maximum frequency to consider, default 2000
+    --minhz=num          Minimum frequency to consider, default 300
+    --maxhz=num          Maximum frequency to consider, default 2000
 
 These two can be used to limit the frequency ranges to consider. Most sounds
 have very loud signals in the bottom range, so it makes sense to remove them.
 The top end is generally just noise.
 
---channels=num       AY channels to use, default 3
+    --channels=num       AY channels to use, default 3
 
 By default, use all three channels. 2 channels also work surprisingly well 
 (when it works).
 
---arplast=num        Arpeggiate last channel, default 1 if more than 1 channel
+    --arplast=num        Arpeggiate last channel, default 1 if more than 1 channel
 
 Arpeggiate the last channel. Instead of using the best peak, skip peaks in a
 round-robin way (like +0, +1, +2, +0, +1, +2...)
@@ -113,50 +114,50 @@ round-robin way (like +0, +1, +2, +0, +1, +2...)
 If only one AY channel is used, arpeggiation is disabled by default, otherwise
 it's enabled by default.
 
---arprange=num       Peaks to cycle, default 3
+    --arprange=num       Peaks to cycle, default 3
 
 Arpeggiation range, i.e, how how many peaks to skip at maximum.
 
---volboost=num       Volume multiplier, default 1.5
+    --volboost=num       Volume multiplier, default 1.5
 
 How much to boost the volume before converting to AY volume. If your result
 is way too loud, scale this down.
 
---monominus=num      Use - instead of + when combining channels, default 0
+    --monominus=num      Use - instead of + when combining channels, default 0
 
 Do left minus right when converting input data to mono instead of left plus right.
 
---sharpen=num        Sharpen filter passes on FFT data, default 4
+    --sharpen=num        Sharpen filter passes on FFT data, default 4
 
 How many passes of sharpen filter should be applied to the FFT data before selecting
 the peaks. Removes noise.
 
---ayrate=num         AY chip rate, default 1774400 (zx spectrum)
+    --ayrate=num         AY chip rate, default 1774400 (zx spectrum)
 
 AY chip rate to use in calculations. If you're using this to play back on some
 other AY chip containing computer, like the Atari ST, you need to give a different
 frequency value.
 
---wavout=filename    Output simulated wav file, default none
+    --wavout=filename    Output simulated wav file, default none
 
 Filename for the simulated audio preview. By default, not generated, but useful when
 finding nice options.
 
---wavoutmono=num     Use mono panning on wav output, default=0
+    --wavoutmono=num     Use mono panning on wav output, default=0
 
 Generate mono panning instead of left/center/right panning for the channels in the preview.
 
---fftout=num         Output tons of fft images, default=0
+    --fftout=num         Output tons of fft images, default=0
 
 Enable generation of crapton of .png files, one for each block, that has a drawing of
 the FFT data the code is looking at. You probably don't want this.
 
---waterfall=filename Output waterfall image on chosen notes, default=0
+    --waterfall=filename Output waterfall image on chosen notes, default=0
 
 Enable generation of a waterfall image that shows which frequencies were picked. May
 be helpful in debugging. Or may not.
 
---showopt=num        Show used options, default=0
+    --showopt=num        Show used options, default=0
 
 If you're unsure whether the tool is reading your options right, this can be used to
 show what it went with in the end.
@@ -171,4 +172,4 @@ starts over from the beginning.
 
 Typically you would do the writes in a timer interrupt.
 
-## EOF
+# EOF
